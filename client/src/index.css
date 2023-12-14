@@ -40,6 +40,6 @@ select {
 }
 
 .app {
-	max-width: 1500px;
+	/* max-width: 1500px; */
 	margin: auto;
 }
