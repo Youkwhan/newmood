@@ -6,6 +6,10 @@ import {
 	Route,
 	useLocation,
 } from "react-router-dom"
+import Home from "./scenes/Home/Home"
+import ItemDetails from "./scenes/itemsDetails/ItemDetails"
+import Checkout from "./scenes/checkout/Checkout"
+import Confirmation from "./scenes/checkout/Confirmation"
 
 // When redirected to a page, start at the top of the page.
 const ScrollToTop = () => {
@@ -18,7 +22,13 @@ const ScrollToTop = () => {
 }
 
 const router = createBrowserRouter(
-	createRoutesFromElements(<Route path="/" element={<Home />} />)
+	createRoutesFromElements(
+		<Route path="/" element={<Home />}>
+			<Route path="item/:itemId" element={<ItemDetails />} />
+			<Route path="checkout" element={<Checkout />} />
+			<Route path="checkout/success" element={<Confirmation />} />
+		</Route>
+	)
 )
 
 function App() {
