@@ -55,6 +55,6 @@ export const {
 	increaseCount,
 	decreaseCount,
 	setIsCartOpen,
-} = cartSlice.action
+} = cartSlice.actions
 
 export default cartSlice.reducer
