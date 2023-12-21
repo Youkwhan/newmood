@@ -26,6 +26,10 @@ function CartMenu() {
 	const cart = useSelector((state) => state.cart.cart)
 	const isCartOpen = useSelector((state) => state.cart.isCartOpen)
 
+	const totalPrice = cart.reduce((total, item) => {
+		return total + item.count * item.attributes.price
+	}, 0)
+
 	return (
 		// OVERLAY; When Modal opens, we want to lower opacity on left side of screen and bring up the modal menu up
 		<Box
@@ -111,12 +115,12 @@ function CartMenu() {
 													<AddIcon />
 												</IconButton>
 											</Box>
-										</FlexBox>
 
-										{/* PRICE */}
-										<Typography fontWeight="bold">
-											${item.attributes.price}
-										</Typography>
+											{/* PRICE */}
+											<Typography fontWeight="bold">
+												${item.attributes.price}
+											</Typography>
+										</FlexBox>
 									</Box>
 								</FlexBox>
 								<Divider />
@@ -125,7 +129,28 @@ function CartMenu() {
 					</Box>
 
 					{/* USER ACTIONS */}
-					<Box></Box>
+					<Box m="20px 0">
+						<FlexBox m="20px 0">
+							<Typography fontWeight="bold">SUBTOTAL</Typography>
+							<Typography fontWeight="bold">${totalPrice}</Typography>
+						</FlexBox>
+						<Button
+							sx={{
+								backgroundColor: shades.primary[400],
+								color: "white",
+								borderRadius: 0,
+								minWidth: "100%",
+								padding: "20px 40px",
+								margin: "20px 0",
+							}}
+							onClick={() => {
+								navigate("/checkout")
+								dispatch(setIsCartOpen({}))
+							}}
+						>
+							CHECKOUT
+						</Button>
+					</Box>
 				</Box>
 			</Box>
 		</Box>
